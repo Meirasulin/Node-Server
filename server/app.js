@@ -2,9 +2,10 @@ const express = require("express");
 const app = express();
 const uuid = require("uuid");
 const bcrypt = require("bcrypt");
+const cors = require("cors");
 const PORT = 9;
 app.use(express.json());
-
+app.use(cors());
 
 const users = [
   {
@@ -23,8 +24,6 @@ const users = [
     password: bcrypt.hashSync("davidPassword", 10),
   },
 ];
-
-
 
 // הצגת כל המשתמשים הקיימים במערך
 app.get("/users", (req, res) => {
@@ -99,9 +98,6 @@ app.post("/log-in", (req, res) => {
     });
   }
 });
-
-
-
 
 app.listen(PORT, () => {
   console.log(`server run on: ${PORT}`);
